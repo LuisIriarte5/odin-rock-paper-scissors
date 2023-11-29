@@ -14,9 +14,11 @@ function getComputerChoice () {
 }
 
 //The next function will ask the user to introduce his/her choice with a prompt
-function getUserChoice () {
+function getUserChoice (message) {
 
-    let choice = prompt("Introduce your choice.\nRock, papper or scissors:");
+    let choice = prompt(message);
+
+    if (choice === null) {return false;}
 
     choice = choice.toLowerCase().trim(); //convert all to lower case and eliminate whitespace if theres any.
     
@@ -30,13 +32,14 @@ function getUserChoice () {
 
 //The next function plays a single rounf of the game
 function playRound (playerSelection, computerSelection) {
+
     if (playerSelection === "rock"){
         switch (computerSelection) {
             case "rock":
                 return "It's a tie";
                 break;
             case "papper":
-                return "You lost!";
+                return "You lose!";
                 break;
             case "scissors":
                 return "You won!";
@@ -52,17 +55,17 @@ function playRound (playerSelection, computerSelection) {
                 return "It's a tie";
                 break;
             case "scissors":
-                return "You lost!";
+                return "You lose!";
                 break;
         }
     }
     else if (playerSelection === "scissors"){
         switch (computerSelection) {
             case "rock":
-                return "You lost!";
+                return "You lose!";
                 break;
             case "papper":
-                return "You won";
+                return "You won!";
                 break;
             case "scissors":
                 return "It's a tie";
@@ -73,19 +76,48 @@ function playRound (playerSelection, computerSelection) {
 
 function game () {
 
-    let user = getUserChoice();
+    //Generate the user and computer choices
+    let user = getUserChoice("Introduce your choice.\nRock, papper or scissors:");
     let computer = getComputerChoice();
 
+    //check if the user had introduced an invalid choice, and ask to introduce it again until correct
     if (user === false) {
         while (!user) {
-            console.log("Wrong selection, please try again. Check your writting.");
-            user = getUserChoice();
+            user = getUserChoice("Wrong selection, please try again. Check your writting.\nRock, papper, scissors:");
         }   
     }
 
+    //Check the result
     let roundResult = playRound(user, computer);
-    console.log(`You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`); 
 
+    //Add the quantity of user and computer wins
+    switch (roundResult) {
+        case "You won!":
+            userWon += 1;
+            break;
+        case "You lose!":
+            computerWon += 1;
+            break;
+        case "It's a tie":
+            break;
+    }
+
+    //Print in the console the result
+    console.log(`You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`);
+    console.log(`user ${userWon} - ${computerWon} computer`);
 }
 
-game();
+// create two variables to control the best-out-of five
+let userWon = 0;
+let computerWon = 0;
+
+//Repeat until somebody win 3 times (best-out-of 5)
+while (userWon < 3 && computerWon < 3) {
+    game();
+}
+
+if (userWon === 3) {
+    console.log("YOU ARE A WINNER!");
+} else {
+    console.log("YOU ARE A LOOSER!");
+}
