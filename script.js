@@ -13,9 +13,23 @@ function getComputerChoice () {
     }
 }
 
+//The next function will ask the user to introduce his/her choice with a prompt
+function getUserChoice () {
+
+    let choice = prompt("Introduce your choice.\nRock, papper or scissors:");
+
+    choice = choice.toLowerCase().trim(); //convert all to lower case and eliminate whitespace if theres any.
+    
+    if (choice === 'rock' || choice === 'papper' || choice === 'scissors') {
+        return choice;
+    }
+    else {
+        return false;//If the user introduces anything but a valid option, it will return false
+    }
+}
+
 //The next function plays a single rounf of the game
 function playRound (playerSelection, computerSelection) {
-    console.log(`You selected ${playerSelection} and the computer selected ${computerSelection}, then:`)
     if (playerSelection === "rock"){
         switch (computerSelection) {
             case "rock":
@@ -57,10 +71,21 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-//Ask for the player's choice with a prompt and store the computer selection
-// const playerSelection = prompt("Write your play! \nRock, papper or scissors?:");
+function game () {
 
-// const computerSelection = getComputerChoice();
+    let user = getUserChoice();
+    let computer = getComputerChoice();
 
+    if (user === false) {
+        while (!user) {
+            console.log("Wrong selection, please try again. Check your writting.");
+            user = getUserChoice();
+        }   
+    }
 
+    let roundResult = playRound(user, computer);
+    console.log(`You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`); 
 
+}
+
+game();
