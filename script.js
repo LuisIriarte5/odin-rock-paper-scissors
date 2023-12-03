@@ -57,8 +57,34 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
+function reset() {
+    result.appendChild(finalResult);
+
+    rockBtn.removeEventListener('click', game);
+    papperBtn.removeEventListener('click', game);
+    scissorsBtn.removeEventListener('click', game);
+
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = "Wanna play again?";
+    result.appendChild(resetBtn);
+
+    resetBtn.addEventListener('click', () => {
+        userWon = 0;
+        computerWon = 0;
+
+        gameResult.textContent = '';
+        score.textContent = '';
+        finalResult.textContent = '';
+
+        rockBtn.addEventListener('click', game);
+        papperBtn.addEventListener('click', game);
+        scissorsBtn.addEventListener('click', game);
+
+        result.removeChild(resetBtn);
+    });
+}
+
 function game (event) {
-    // console.log(event.srcElement.getAttribute('id'));
     //Generate the user and computer choices
     let user = event.srcElement.getAttribute('id');
     let computer = getComputerChoice();
@@ -79,8 +105,16 @@ function game (event) {
     }
 
     //Print in the console the result
-    console.log(`You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`);
-    console.log(`user ${userWon} - ${computerWon} computer`);
+    gameResult.textContent = `You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`;
+    score.textContent = `user ${userWon} - ${computerWon} computer`;
+
+    if (userWon >= 3) {
+        finalResult.textContent = `YOU ARE A WINNER!`;
+        reset();
+    } else if (computerWon >= 3) {
+        finalResult.textContent = `YOU ARE A LOOSER!`
+        reset();
+    }
 }
 
 // create two variables to control the best-out-of five
@@ -97,15 +131,7 @@ papperBtn.addEventListener('click', game);
 const scissorsBtn = document.querySelector('#scissors');
 scissorsBtn.addEventListener('click', game);
 
-const result = document.querySelector('#gameResult');
-
-//Repeat until somebody win 3 times (best-out-of 5)
-// while (userWon < 1 && computerWon < 1) {
-//     game();
-// }
-
-// if (userWon) {
-//     console.log("YOU ARE A WINNER!");
-// } else {
-//     console.log("YOU ARE A LOOSER!");
-// }
+const result = document.querySelector('.result');
+const gameResult = document.querySelector('#gameResult');
+const score = document.querySelector('#score');
+const finalResult = document.createElement('p');
