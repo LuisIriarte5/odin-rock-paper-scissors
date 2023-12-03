@@ -13,23 +13,6 @@ function getComputerChoice () {
     }
 }
 
-//The next function will ask the user to introduce his/her choice with a prompt
-function getUserChoice (message) {
-
-    let choice = prompt(message);
-
-    if (choice === null) {return false;}
-
-    choice = choice.toLowerCase().trim(); //convert all to lower case and eliminate whitespace if theres any.
-    
-    if (choice === 'rock' || choice === 'papper' || choice === 'scissors') {
-        return choice;
-    }
-    else {
-        return false;//If the user introduces anything but a valid option, it will return false
-    }
-}
-
 //The next function plays a single rounf of the game
 function playRound (playerSelection, computerSelection) {
 
@@ -80,13 +63,6 @@ function game (event) {
     let user = event.srcElement.getAttribute('id');
     let computer = getComputerChoice();
 
-    //check if the user had introduced an invalid choice, and ask to introduce it again until correct
-    if (user === false) {
-        while (!user) {
-            user = getUserChoice("Wrong selection, please try again. Check your writting.\nRock, papper, scissors:");
-        }   
-    }
-
     //Check the result
     let roundResult = playRound(user, computer);
 
@@ -120,6 +96,8 @@ papperBtn.addEventListener('click', game);
 
 const scissorsBtn = document.querySelector('#scissors');
 scissorsBtn.addEventListener('click', game);
+
+const result = document.querySelector('#gameResult');
 
 //Repeat until somebody win 3 times (best-out-of 5)
 // while (userWon < 1 && computerWon < 1) {
