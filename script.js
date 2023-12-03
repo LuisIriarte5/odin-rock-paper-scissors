@@ -74,10 +74,10 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game () {
-
+function game (event) {
+    // console.log(event.srcElement.getAttribute('id'));
     //Generate the user and computer choices
-    let user = getUserChoice("Introduce your choice.\nRock, papper or scissors:");
+    let user = event.srcElement.getAttribute('id');
     let computer = getComputerChoice();
 
     //check if the user had introduced an invalid choice, and ask to introduce it again until correct
@@ -111,13 +111,23 @@ function game () {
 let userWon = 0;
 let computerWon = 0;
 
-//Repeat until somebody win 3 times (best-out-of 5)
-while (userWon < 3 && computerWon < 3) {
-    game();
-}
+//User selection event listeners
+const rockBtn = document.querySelector('#rock');
+rockBtn.addEventListener('click', game);
 
-if (userWon === 3) {
-    console.log("YOU ARE A WINNER!");
-} else {
-    console.log("YOU ARE A LOOSER!");
-}
+const papperBtn = document.querySelector('#papper');
+papperBtn.addEventListener('click', game);
+
+const scissorsBtn = document.querySelector('#scissors');
+scissorsBtn.addEventListener('click', game);
+
+//Repeat until somebody win 3 times (best-out-of 5)
+// while (userWon < 1 && computerWon < 1) {
+//     game();
+// }
+
+// if (userWon) {
+//     console.log("YOU ARE A WINNER!");
+// } else {
+//     console.log("YOU ARE A LOOSER!");
+// }
