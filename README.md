@@ -6,3 +6,4 @@ The objective is to apply the habilities acquired in the first lessons of javasc
 
 v2.0
 Add UI to the project. Apply the knowledge acquired in arrays, loops, and DOM manipulation and events.
+Icons from istockphoto.com

@@ -108,10 +108,10 @@ function game (event) {
     gameResult.textContent = `You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`;
     score.textContent = `user ${userWon} - ${computerWon} computer`;
 
-    if (userWon >= 3) {
+    if (userWon >= 5) {
         finalResult.textContent = `YOU ARE A WINNER!`;
         reset();
-    } else if (computerWon >= 3) {
+    } else if (computerWon >= 5) {
         finalResult.textContent = `YOU ARE A LOOSER!`
         reset();
     }

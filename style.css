@@ -1,0 +1,73 @@
+* {
+    /* border: 1px solid yellow; */
+}
+
+body {
+    margin: 0;
+    background-color: rgb(111, 96, 96);
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content {
+    align-self: center;
+    justify-self: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: Arial, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.rivals {
+    display: flex;
+}
+
+ .user .computer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#score {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.computerSelection,
+.userSelection{
+    display: flex;
+    gap: 10px;
+}
+
+.userSelection div {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    background-color: grey;
+    color: white;
+    text-align: center;
+    font-weight: 200;
+    justify-self: flex-end;
+}
