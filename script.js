@@ -76,6 +76,14 @@ function reset() {
         score.textContent = '';
         finalResult.textContent = '';
 
+        compChoice[0].style.opacity = null;
+        compChoice[1].style.opacity = null;
+        compChoice[2].style.opacity = null;
+
+        userChoice[0].style.opacity = null;
+        userChoice[1].style.opacity = null;
+        userChoice[2].style.opacity = null;
+
         rockBtn.addEventListener('click', game);
         papperBtn.addEventListener('click', game);
         scissorsBtn.addEventListener('click', game);
@@ -84,10 +92,34 @@ function reset() {
     });
 }
 
+function focusSelection (selection, queries) {
+
+    switch (selection) {
+        case 'rock':
+            queries[0].style.opacity = 0.5;
+            queries[1].style.opacity = null;
+            queries[2].style.opacity = null;
+            break;
+        case 'papper':
+            queries[0].style.opacity = null;
+            queries[1].style.opacity = 0.5;
+            queries[2].style.opacity = null;
+            break;
+        case 'scissors':
+            queries[0].style.opacity = null;
+            queries[1].style.opacity = null;
+            queries[2].style.opacity = 0.5;
+            break;
+    }
+}
+
 function game (event) {
     //Generate the user and computer choices
     let user = event.srcElement.getAttribute('id');
     let computer = getComputerChoice();
+
+    focusSelection (computer, compChoice);
+    focusSelection (user, userChoice);
 
     //Check the result
     let roundResult = playRound(user, computer);
@@ -95,17 +127,20 @@ function game (event) {
     //Add the quantity of user and computer wins
     switch (roundResult) {
         case "You won!":
+            gameResult.textContent = `${user} beats ${computer}.\n${roundResult}`;
             userWon += 1;
             break;
         case "You lose!":
+            gameResult.textContent = `${user} is beated by ${computer}.\n${roundResult}`;
             computerWon += 1;
             break;
         case "It's a tie":
+            gameResult.textContent = roundResult;
             break;
     }
 
     //Print in the console the result
-    gameResult.textContent = `You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`;
+    // gameResult.textContent = `You selected ${user} and the computer selected ${computer}, then:\n${roundResult}`;
     score.textContent = `user ${userWon} - ${computerWon} computer`;
 
     if (userWon >= 5) {
@@ -135,3 +170,6 @@ const result = document.querySelector('.result');
 const gameResult = document.querySelector('#gameResult');
 const score = document.querySelector('#score');
 const finalResult = document.createElement('p');
+
+const compChoice = document.querySelectorAll(`.computerSelection div`);
+const userChoice = document.querySelectorAll(`.userSelection div`);

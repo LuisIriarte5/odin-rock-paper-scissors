@@ -1,7 +1,3 @@
-* {
-    /* border: 1px solid yellow; */
-}
-
 body {
     margin: 0;
     background-color: rgb(111, 96, 96);
@@ -28,11 +24,13 @@ body {
     display: flex;
 }
 
- .user .computer {
+ .user,
+ .computer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 #score {
     width: 200px;
@@ -47,9 +45,8 @@ body {
     gap: 10px;
 }
 
-.userSelection div {
-    display: flex;
-    flex-direction: column;
+.userSelection div:hover {
+    opacity: 0.8;
 }
 
 img {
@@ -58,6 +55,7 @@ img {
 }
 
 .result {
+    margin: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
